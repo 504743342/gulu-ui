@@ -27,5 +27,8 @@ export default {
     width: $h2;
     border-radius: $h2 / 2;
     background: white;
+    &:hover {
+      left: calc(100% - #{$h2} - 2px);
+    }
   }
 </style>
