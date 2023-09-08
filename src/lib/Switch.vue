@@ -26,6 +26,9 @@ export default {
     background: gray;
     border-radius: $h / 2;
     position: relative;
+    :focus {
+      outline: none;
+    }
     &.checked {
       background: blue;
       > span {
@@ -40,6 +43,7 @@ export default {
       width: $h2;
       border-radius: $h2 / 2;
       background: white;
+      transition: left 250ms;
     }
   }
 
