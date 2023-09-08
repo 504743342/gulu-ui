@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Switch :value="y" @input="y = $event"/>
+    <Switch v-model:value="y" />
   </div>
 </template>
-
 <script lang="ts">
 import Switch from '../lib/Switch.vue';
 import {ref} from 'vue';
