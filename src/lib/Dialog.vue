@@ -33,7 +33,7 @@ export default {
     },
     closeOnClickOverlay: {
       type: Boolean,
-      default: true
+      default: true,
     },
     ok: {
       type: Function
@@ -60,7 +60,7 @@ export default {
       }
     }
     const cancel = () => {
-      context.emit('cancel')
+      props.cancel?.()
       close()
     }
     return {close, onClickOverlay, ok, cancel}
