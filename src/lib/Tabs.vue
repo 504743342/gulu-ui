@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="gulu-tabs-content">
-      <component class="gulu-tabs-content-item" :is="current" :key="selected" />
+      <component class="gulu-tabs-content-item" :is="current" :key="current.props.title" />
     </div>
   </div>
 </template>
