@@ -8,6 +8,7 @@
              :class="{selected: t===selected}"
              :key="index">{{t}}
         </div>
+        <div class="gulu-tabs-nav-indicator"></div>
       </div>
     </div>
     <div class="gulu-tabs-content">
@@ -59,6 +60,7 @@ export default {
       display: flex;
       color: $color;
       border-bottom: 1px solid $border-color;
+      position: relative;
       &-item {
         padding: 8px 0;
         margin: 0 16px;
@@ -69,6 +71,14 @@ export default {
         &.selected {
           color: $blue;
         }
+      }
+      &-indicator {
+        position: absolute;
+        height: 3px;
+        background: $blue;
+        left: 0;
+        bottom: -1px;
+        width: 100px;
       }
     }
     &-content {
