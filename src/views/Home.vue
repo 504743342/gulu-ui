@@ -5,7 +5,7 @@
       <h1>轱辘UI</h1>
       <h2>一个厉害的 UI 框架</h2>
       <p class="actions">
-        <router-link to="/doc">
+        <router-link to="/doc/Intro">
           开始
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kuaijin-copy"></use>

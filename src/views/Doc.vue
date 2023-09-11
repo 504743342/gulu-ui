@@ -39,9 +39,9 @@
 </template>
 
 <style lang="scss" scoped>
-.router-link-active {
-  text-decoration: underline;
-}
+$lightbgc: #e8f7ff;
+$deepbgc: blue;
+$text: #87CEFA;
 .layout {
   display: flex;
   flex-direction: column;
@@ -72,7 +72,7 @@
   aside{
     box-shadow: 5px 0 5px rgba(51, 51, 51, 0.1);
     width: 150px;
-    padding: 16px;
+    padding: 16px 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -80,10 +80,42 @@
     height: 100%;
     >h2 {
       margin-bottom: 4px;
+      padding: 0 16px;
     }
     >ol {
       >li {
-        padding: 4px 0;
+        > a {
+          display: block;
+          padding: 4px 16px;
+          text-decoration: none;
+          &:hover {
+            background: $lightbgc;
+          }
+        }
+        .router-link-active {
+          position: relative;
+          background: $lightbgc;
+          color: $text;
+          &::after {
+            content: "";
+            display: block;
+            animation: bdrolate 0.8s;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 32px;
+            background: $deepbgc;
+          }
+        }
+      }
+    }
+    @keyframes bdrolate {
+      0% {
+        transform: rotateX(90deg);
+      }
+      100% {
+        transform: rotateX(0deg);
       }
     }
   }
