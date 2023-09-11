@@ -71,6 +71,7 @@ $text: #87CEFA;
 }
   aside{
     box-shadow: 5px 0 5px rgba(51, 51, 51, 0.1);
+    background: white;
     width: 150px;
     padding: 16px 0;
     position: fixed;
@@ -78,6 +79,8 @@ $text: #87CEFA;
     left: 0;
     padding-top: 70px;
     height: 100%;
+    z-index: 1;
+
     >h2 {
       margin-bottom: 4px;
       padding: 0 16px;
