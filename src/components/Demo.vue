@@ -5,16 +5,16 @@
             <component :is="component" />
         </div>
         <div class="demo-actions">
-            <Button>查看代码</Button>
+            <Button @click="toggleCode">查看代码</Button>
         </div>
-        <div class="demo-code">
-            <pre class="language-html" v-html="Prism.highlight(component.__sourceCode, Prism.languages.html, 'html')"></pre>
+        <div class="demo-code" v-if="codeVisible">
+            <pre class="language-html" v-html="html"></pre>
         </div>
     </div>
 
 </template>
 <script lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Button from '../lib/Button.vue';
 import Switch1Demo from './Switch1.demo.vue';
 import Switch2Demo from './Switch2.demo.vue';
@@ -28,9 +28,16 @@ export default {
         }
     },
     components: { Button },
-    setup() {
+    setup(props) {
+        const html = computed(() => {
+            return Prism.highlight(props.component.__sourceCode, Prism.languages.html, 'html')
+        })
+        const codeVisible = ref(false)
+        const toggleCode = () => {
+            codeVisible.value = !codeVisible.value
+        }
         const bool = ref(false)
-        return { bool, Switch1Demo, Switch2Demo, Prism }
+        return { bool, Switch1Demo, Switch2Demo, Prism, codeVisible, toggleCode, html}
     }
 };
 </script>
