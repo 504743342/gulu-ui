@@ -1,10 +1,10 @@
 <template>
   <button
-      class="gulu-button"
+      class="king-button"
       :class="classes"
       :disabled="disabled"
   >
-    <span v-if="loading" class="gulu-loadingIndicator"></span>
+    <span v-if="loading" class="king-loadingIndicator"></span>
     <slot />
   </button>
 </template>
@@ -39,9 +39,9 @@ export default {
     const {theme, size, level} = props
     const classes = computed(() => {
       return {
-        [`gulu-theme-${theme}`]: theme,
-        [`gulu-size-${size}`]: size,
-        [`gulu-level-${level}`]: level
+        [`king-theme-${theme}`]: theme,
+        [`king-size-${size}`]: size,
+        [`king-level-${level}`]: level
       }
     })
     return {classes}
@@ -57,7 +57,7 @@ export default {
   $radius: 4px;
   $red: red;
   $grey: grey;
-  .gulu-button {
+  .king-button {
     box-sizing: border-box;
     height: $h;
     padding: 0 12px;
@@ -86,7 +86,7 @@ export default {
     &::-moz-focus-inner {
       border: 0;
     }
-    &.gulu-theme-link {
+    &.king-theme-link {
       border-color: transparent;
       box-shadow: none;
       color: $blue;
@@ -94,7 +94,7 @@ export default {
         color: lighten($blue, 10%);
       }
     }
-    &.gulu-theme-text {
+    &.king-theme-text {
       border-color: transparent;
       box-shadow: none;
       color: inherit;
@@ -102,18 +102,18 @@ export default {
         background: darken(white, 5%);
       }
     }
-    &.gulu-size-big {
+    &.king-size-big {
       font-size: 24px;
       height: 48px;
       padding: 0 16px;
     }
-    &.gulu-size-small {
+    &.king-size-small {
       font-size: 12px;
       height: 20px;
       padding: 0 4px;
     }
-    &.gulu-theme-button {
-      &.gulu-level-main {
+    &.king-theme-button {
+      &.king-level-main {
         background: $blue;
         color: white;
         border-color: $blue;
@@ -123,7 +123,7 @@ export default {
           border-color: darken($blue, 10%);
         }
       }
-      &.gulu-level-danger {
+      &.king-level-danger {
         background: $red;
         border-color: $red;
         color: white;
@@ -134,8 +134,8 @@ export default {
         }
       }
     }
-    &.gulu-theme-link {
-      &.gulu-level-danger {
+    &.king-theme-link {
+      &.king-level-danger {
         color: $red;
         &:hover,
         &:focus {
@@ -143,15 +143,15 @@ export default {
         }
       }
     }
-    &.gulu-theme-text {
-      &.gulu-level-main {
+    &.king-theme-text {
+      &.king-level-main {
         color: $blue;
         &:hover,
         &:focus {
           color: darken($blue, 10%);
         }
       }
-      &.gulu-level-danger {
+      &.king-level-danger {
         color: $red;
         &:hover,
         &:focus {
@@ -159,7 +159,7 @@ export default {
         }
       }
     }
-    &.gulu-theme-button {
+    &.king-theme-button {
       &[disabled] {
         cursor: not-allowed;
         color: $grey;
@@ -168,14 +168,14 @@ export default {
         }
       }
     }
-    &.gulu-theme-link,
-    &.gulu-theme-text {
+    &.king-theme-link,
+    &.king-theme-text {
       &[disabled]{
         cursor: not-allowed;
         color: $grey;
       }
     }
-    >.gulu-loadingIndicator {
+    >.king-loadingIndicator {
       width: 14px;
       height: 14px;
       display: inline-block;
@@ -184,10 +184,10 @@ export default {
       border-color: $blue $blue $blue transparent;
       border-style: solid;
       border-width: 2px;
-      animation: gulu-spin 1s infinite linear;
+      animation: king-spin 1s infinite linear;
     }
   }
-  @keyframes gulu-spin {
+  @keyframes king-spin {
     0%{transform: rotate(0deg)}
     100%{transform: rotate(360deg)}
   }

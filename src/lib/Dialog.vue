@@ -1,12 +1,12 @@
 <template>
   <template v-if="visible">
     <Teleport to="body">
-      <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
-      <div class="gulu-dialog-wrapper">
-        <div class="gulu-dialog">
+      <div class="king-dialog-overlay" @click="onClickOverlay"></div>
+      <div class="king-dialog-wrapper">
+        <div class="king-dialog">
           <header>
             <slot name="title"/>
-            <span class="gulu-dialog-close"></span>
+            <span class="king-dialog-close"></span>
           </header>
           <main>
             <slot name="content"/>
@@ -71,7 +71,7 @@ export default {
 <style lang="scss" scoped>
   $radius: 4px;
   $border-color: #d9d9d9;
-  .gulu-dialog {
+  .king-dialog {
     background: white;
     border-radius: $radius;
     box-shadow: 0 0 3px fade-out(black, 0.5);

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="gulu-tabs">
-      <div class="gulu-tabs-nav" ref="container">
-        <div class="gulu-tabs-nav-item"
+    <div class="king-tabs">
+      <div class="king-tabs-nav" ref="container">
+        <div class="king-tabs-nav-item"
              v-for="(t, index) in titles"
-             :ref="el => { if (t===selected) selectedItem = el }"
+             :ref="el => { if ( t===selected ) selectedItem = el  }"
              @click="select(t)"
              :class="{selected: t===selected}"
              :key="index">{{t}}
         </div>
-        <div class="gulu-tabs-nav-indicator" ref="indicator"></div>
+        <div class="king-tabs-nav-indicator" ref="indicator"></div>
       </div>
     </div>
-    <div class="gulu-tabs-content">
-      <component class="gulu-tabs-content-item" :is="current" :key="current.props.title" />
+    <div class="king-tabs-content">
+      <component class="king-tabs-content-item" :is="current" :key="current.props.title" />
     </div>
   </div>
 </template>
@@ -29,9 +29,9 @@ export default {
     }
   },
   setup(props, context){
-    const selectedItem = ref<HTMLDivElement>(null)
-    const indicator = ref<HTMLDivElement>(null)
-    const container = ref<HTMLDivElement>(null)
+    const selectedItem = ref<HTMLDivElement | null>(null)
+    const indicator = ref<HTMLDivElement | null>(null)
+    const container = ref<HTMLDivElement | null>(null)
     onMounted(() => {
       watchEffect(() => {
         const {width} = selectedItem.value.getBoundingClientRect()
@@ -42,7 +42,7 @@ export default {
         indicator.value.style.left = left + 'px'
       })
     })
-    const defaults = context.slots.default()
+    const defaults = context.slots.default!()
     defaults.forEach((tag) => {
       if(tag.type !== Tab ) {
         throw new Error('Tabs 子标签必须是 Tab')
@@ -59,7 +59,7 @@ export default {
     const select = (title: string) => {
       context.emit('update:selected', title)
     }
-    return {defaults, titles, select, current, selectedItem, indicator, container}
+    return {defaults, titles, select, current, selectedItem , indicator, container }
   }
 };
 </script>
@@ -69,7 +69,7 @@ export default {
   $color: #333;
   $border-color: #d9d9d9;
 
-  .gulu-tabs {
+  .king-tabs {
     &-nav {
       display: flex;
       color: $color;
