@@ -16,8 +16,8 @@
 <script lang="ts">
 import { computed, ref } from 'vue';
 import Button from '../lib/Button.vue';
-import Switch1Demo from './Switch1.demo.vue';
-import Switch2Demo from './Switch2.demo.vue';
+import Switch1Demo from './Switch/Switch1.demo.vue';
+import Switch2Demo from './Switch/Switch2.demo.vue';
 import 'prismjs';
 const Prism = (window as any).Prism
 export default {
