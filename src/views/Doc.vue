@@ -51,8 +51,8 @@ $text: #87CEFA;
   }
   >.content {
     flex-grow: 1;
-    padding-top: 55px;
-    padding-left: 151px;
+    padding-top: 70px;
+    padding-left: 230px;
     @media (max-width: 500px) {
       padding-left: 0;
     }
@@ -72,7 +72,7 @@ $text: #87CEFA;
   aside{
     box-shadow: 5px 0 5px rgba(51, 51, 51, 0.1);
     background: white;
-    width: 150px;
+    min-width: 220px;
     padding: 16px 0;
     position: fixed;
     top: 0;
@@ -83,13 +83,13 @@ $text: #87CEFA;
 
     >h2 {
       margin-bottom: 4px;
-      padding: 0 16px;
+      padding: 8px 0 8px 24px;
     }
     >ol {
       >li {
         > a {
           display: block;
-          padding: 4px 16px;
+          padding: 8px 0 8px 24px;
           text-decoration: none;
           &:hover {
             background: $lightbgc;
@@ -107,7 +107,7 @@ $text: #87CEFA;
             top: 0;
             right: 0;
             width: 3px;
-            height: 32px;
+            height: 40px;
             background: $deepbgc;
           }
         }

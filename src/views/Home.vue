@@ -2,7 +2,7 @@
   <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
-      <h1>轱辘UI</h1>
+      <h1>king UI for vue3</h1>
       <h2>一个厉害的 UI 框架</h2>
       <p class="actions">
         <router-link to="/doc/Intro">
@@ -34,11 +34,11 @@
           <use xlink:href="#icon-typescript"></use>
         </svg>
         <h3>基于 TypeScript</h3>
-        <p>源代码采用 TypeScript 书写（非严格检查）</p>
+        <p>源代码采用 TypeScript 书写</p>
       </li>
       <li>
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shandian"></use>
+          <use xlink:href="#icon-dengpaotishi"></use>
         </svg>
         <h3>代码易读</h3>
         <p>每个组件的源代码都极其简洁</p>
@@ -58,43 +58,56 @@ $color: #046d9e;
   }
   .features {
     margin: 64px auto;
-    width: 400px;
+    padding: 0 16px;
     @media (min-width: 800px) {
       width: 800px;
-    }
-    @media (min-width: 1200px) {
-      width: 1200px;
-    }
-    >ul {
-      display: flex;
-      flex-wrap: wrap;
-      >li {
-        width: 400px;
-        margin: 16px 0;
-        display: grid;
-        justify-content: start;
-        align-content: space-between;
-        grid-template-areas:
-          "icon title"
-          "icon text";
-        grid-template-columns: 80px auto;
-        grid-template-rows: 1fr auto;
-        >svg {
-          grid-area: icon;
-          width: 64px;
-          height: 64px;
-        }
-        >h3 {
-          grid-area: title;
-          font-size: 28px;
-        }
-        >p {
-          grid-area: text;
+      >ul {
+        >li {
+          width: 50%;
         }
       }
     }
+    @media (min-width: 1200px) {
+      width: 1200px;
+      >ul {
+        >li {
+        width: 33.3333%;
+        }
+      }
+    }
+    >ul {
+    display: flex;
+    flex-wrap: wrap;
 
+    >li {
+      margin: 16px 0;
+      display: grid;
+      justify-content: start;
+      align-content: space-between;
+      grid-template-areas:
+        "icon title"
+        "icon text";
+      grid-template-columns: 80px auto;
+      grid-template-rows: 1fr auto;
+
+      >svg {
+        grid-area: icon;
+        width: 64px;
+        height: 64px;
+      }
+
+      >h3 {
+        grid-area: title;
+        font-size: 28px;
+      }
+
+      >p {
+        grid-area: text
+      }
+    }
   }
+}
+
   .banner {
     color: $color;
     padding: 100px 0;
@@ -125,7 +138,6 @@ $color: #046d9e;
 
 <script lang="ts">
 import Topnav from '../components/Topnav.vue';
-import {inject, Ref} from 'vue';
 export default {
   components: {Topnav}
 }
