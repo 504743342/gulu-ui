@@ -6,7 +6,7 @@
         <div class="king-dialog">
           <header>
             <slot name="title"/>
-            <span class="king-dialog-close"></span>
+            <span @click="close" class="king-dialog-close"></span>
           </header>
           <main>
             <slot name="content"/>
@@ -22,50 +22,35 @@
   </template>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Button from './Button.vue';
+ const props = defineProps<{
+  visible?: boolean
+  closeOnClickOverlay?: boolean
+  ok?: () => boolean
+  cancel?: () => void
+ }>() 
+  const emit = defineEmits<{
+    (e: 'update:visible', visible: boolean): void
+  }>()
 
-export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: true,
-    },
-    ok: {
-      type: Function
-    },
-    cancel: {
-      type: Function
-    }
-  },
-  components: {
-    Button
-  },
-  setup(props, context) {
-    const close = () => {
-      context.emit('update:visible', false)
-    }
-    const onClickOverlay = () => {
-      if(props.closeOnClickOverlay) {
-        close()
-      }
-    }
-    const onClickOk = () => {
-      if(props.ok?.() !== false) {
-        close()
-      }
-    }
-    const onClickCancel = () => {
-      props.cancel?.()
+  const close = () => {
+    emit('update:visible', false)
+  }
+  const onClickOverlay = () => {
+    if(props.closeOnClickOverlay) {
       close()
     }
-    return {close, onClickOverlay, onClickOk, onClickCancel}
   }
-};
+  const onClickOk = () => {
+    if(props.ok?.() !== false) {
+      close()
+    }
+  }
+  const onClickCancel = () => {
+    props.cancel?.()
+    close()
+  }
 </script>
 
 <style lang="scss" scoped>

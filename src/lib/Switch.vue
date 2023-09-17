@@ -2,22 +2,21 @@
   <button class="king-switch" @click="toggle" :class="{'king-checked':value}" ><span></span></button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 
-export default {
-  props: {
-    value: Boolean
-  },
-  setup(props, context) {
-    const toggle = () => {
-      context.emit('update:value', !props.value)
-    }
-    return {toggle}
+
+ const props = defineProps<{ value?: boolean }> ()
+ const emit = defineEmits<{
+  (e: 'update:value', value: boolean): void
+ }> ()
+  const toggle = () => {
+    emit('update:value', !props.value)
   }
-};
+  
 </script>
 
 <style lang="scss">
+  @use "sass:math";
   $h: 22px;
   $h2: $h - 4px;
   .king-switch {
@@ -25,7 +24,7 @@ export default {
     width: $h * 2;
     border: none;
     background: #bfbfbf;
-    border-radius: $h / 2;
+    border-radius: math.div($h, 2);
     position: relative;
     &:focus {
       outline: none;
@@ -51,7 +50,7 @@ export default {
       left: 2px;
       height: $h2;
       width: $h2;
-      border-radius: $h2 / 2;
+      border-radius: math.div($h2, 2);
       background: white;
       transition: all 250ms;
     }

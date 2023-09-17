@@ -3,50 +3,31 @@
       class="king-button"
       :class="classes"
       :disabled="disabled"
+      @click="$emit('click', $event)"
   >
     <span v-if="loading" class="king-loadingIndicator"></span>
     <slot />
   </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
-
-export default {
-  props: {
-    theme: {
-      type: String,
-      default: 'button'
-    },
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    level: {
-      type: String,
-      default: 'normal'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
+ const props = defineProps<{
+  theme?: 'button' | 'text' | 'link';
+  size?: 'normal' | 'big' | 'small';
+  level?: 'normal' | 'main' | 'danger';
+  disabled?: boolean;
+  loading?: boolean;
+ }>() 
+  const {theme, size, level} = props
+  defineEmits<{ (e: 'click', event: MouseEvent): void }>()
+  const classes = computed(() => {
+    return {
+      [`king-theme-${theme}`]: theme,
+      [`king-size-${size}`]: size,
+      [`king-level-${level}`]: level
     }
-  },
-  setup(props) {
-    const {theme, size, level} = props
-    const classes = computed(() => {
-      return {
-        [`king-theme-${theme}`]: theme,
-        [`king-size-${size}`]: size,
-        [`king-level-${level}`]: level
-      }
-    })
-    return {classes}
-  }
-};
+  })
 </script>
 
 <style lang="scss">

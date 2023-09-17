@@ -1,12 +1,20 @@
 import Dialog from './Dialog.vue';
-import {createApp, h} from 'vue';
+import {VNode, createApp, h} from 'vue';
 
-export const openDialog = (options) => {
+interface Options {
+  title?: VNode;
+  content?: string;
+  closeOnClickOverlay?: boolean;
+  ok?: () => boolean;
+  cancel?: () => void;
+}
+
+export const openDialog = (options: Options) => {
   const {title, content, closeOnClickOverlay, ok, cancel} = options;
   const div = document.createElement('div');
   document.body.appendChild(div);
   const close = () => {
-    app.unmount(div);
+    app.unmount();
     div.remove();
   };
   const app = createApp({
@@ -15,7 +23,7 @@ export const openDialog = (options) => {
         Dialog,
         {
           visible: true,
-          'onUpdate:visible': (newVisible) => {
+          'onUpdate:visible': (newVisible: boolean) => {
             if (newVisible === false) {
               close();
             }

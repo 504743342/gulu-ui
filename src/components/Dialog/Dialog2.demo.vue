@@ -19,7 +19,7 @@ export default {
                 content: '你好',
                 closeOnClickOverlay: true,
                 ok() {
-                    console.log('ok')
+                    return false;  
                 },
                 cancel() {
                     console.log('cancel')

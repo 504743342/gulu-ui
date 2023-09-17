@@ -4,7 +4,7 @@
       <div class="king-tabs-nav" ref="container">
         <div class="king-tabs-nav-item"
              v-for="(t, index) in titles"
-             :ref="el => { if ( t===selected ) selectedItem = el }"
+             :ref="el => { if ( t===selected ) selectedItem = el as HTMLDivElement }"
              @click="select(t)"
              :class="{selected: t===selected}"
              :key="index">{{t}}
@@ -18,53 +18,50 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Tab from './Tab.vue';
-import {computed, onMounted, ref, watchEffect} from 'vue';
+import {computed, onMounted, ref, useSlots, watchEffect} from 'vue';
+ const props = defineProps<{selected?: string}>() 
+ const emit = defineEmits<{
+   (e: 'update:selected', value: string): void
+ }>()
 
-export default {
-  props: {
-    selected: {
-      type: String
+  const selectedItem = ref<HTMLDivElement>(null)
+  const indicator = ref<HTMLDivElement>(null)
+  const container = ref<HTMLDivElement>(null)
+
+  onMounted(() => {
+    watchEffect(() => {
+      const {width} = selectedItem.value.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+      const {left: left1} = container.value.getBoundingClientRect()
+      const {left: left2} = selectedItem.value.getBoundingClientRect()
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
+    },{
+      flush: 'post'
+    })
+  })
+  const slots = useSlots()
+  const defaults = slots.default()
+  defaults.forEach((tag) => {
+    //@ts-ignore
+    if(tag.type.name !== Tab.name ) {
+      throw new Error('Tabs 子标签必须是 Tab')
     }
-  },
-  setup(props, context){
-    const selectedItem = ref<HTMLDivElement | null>(null)
-    const indicator = ref<HTMLDivElement | null>(null)
-    const container = ref<HTMLDivElement | null>(null)
-    onMounted(() => {
-      watchEffect(() => {
-        const {width} = selectedItem.value.getBoundingClientRect()
-        indicator.value.style.width = width + 'px'
-        const {left: left1} = container.value.getBoundingClientRect()
-        const {left: left2} = selectedItem.value.getBoundingClientRect()
-        const left = left2 - left1
-        indicator.value.style.left = left + 'px'
-      },{
-        flush: 'post'
-      })
-    })
-    const defaults = context.slots.default!()
-    defaults.forEach((tag) => {
-      //@ts-ignore
-      if(tag.type.name !== Tab.name ) {
-        throw new Error('Tabs 子标签必须是 Tab')
-      }
-    })
-    const titles = defaults.map((tag) => {
-      return tag.props.title
-    })
-    const current = computed(() => {
-      return defaults.filter((tag) => {
-        return tag.props.title === props.selected
-      })[0]
-    })
-    const select = (title: string) => {
-      context.emit('update:selected', title)
-    }
-    return {defaults, titles, select, current, selectedItem , indicator, container }
+  })
+  const titles = defaults.map((tag) => {
+    return tag.props.title
+  })
+  const current = computed(() => {
+    return defaults.filter((tag) => {
+      return tag.props.title === props.selected
+    })[0]
+  })
+  const select = (title: string) => {
+    emit('update:selected', title)
   }
-};
+
 </script>
 
 <style lang="scss" scoped>
